@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #fcf7fd;
+}
+
+body {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  letter-spacing: 1px;
+  font-size: 16px;
+  background-color: #49184e;
+}
+
+@media screen and (min-width: 992px) {
+  body {
+    font-size: 17px;
+  }
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.ape-img {
+  width: 90%;
+}
+
+@media screen and (min-width: 992px) {
+  .ape-img {
+    position: relative;
+    left: 2.2rem;
+  }
+}
+
+a {
+  color: #fcf7fd !important;
+  text-decoration: none;
+  transition: 0.15s ease-in-out;
+}
+
+.swiper-container {
+  width: 480px;
+}
+
+@media screen and (min-width: 640px) {
+  .swiper-container {
+    width: 640px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .swiper-container {
+    width: 768px;
+  }
+}
+
+#swipe-slide {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  #swipe-slide {
+    justify-content: space-between;
+    /* margin-right: 18px !important; */
+    width: auto !important;
+  }
+}
+
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
+.swiper-pagination-horizontal.swiper-pagination-bullets
+  .swiper-pagination-bullet {
+  border: solid 1px #fff;
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: #49184e;
+}
+
+ul {
+  padding: 0;
+}
