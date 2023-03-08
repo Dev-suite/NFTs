@@ -1,99 +1,13 @@
 import styled from "styled-components";
 import history from "../../assets/history.png";
 
-import tiger from "../../assets/tiger.png";
-import peter from "../../assets/peter.png";
-
-import beam from "../../assets/beam.png";
-import kate from "../../assets/kate.png";
-
-import honey from "../../assets/honey.png";
-import joan from "../../assets/joan.png";
-
-import newKid from "../../assets/new.png";
-import karl from "../../assets/karl.png";
-
-import homicide from "../../assets/homicide.png";
-import ella from "../../assets/ella.png";
-
-import everton from "../../assets/everton.png";
-import kole from "../../assets/kole.png";
-
 import Button from "../UI/Button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { modalState } from "../../atoms/modaAtom";
+import { artIdState, artState } from "../../atoms/artsAtom";
 
-const arts = [
-  {
-    artImg: tiger,
-    name: "Tiger swag",
-    no: "#127",
-    ownerPic: peter,
-    ownerName: "peter paul",
-    bid: "1 ETH",
-  },
-
-  {
-    artImg: beam,
-    name: "Perfecto beam",
-    no: "#099",
-    ownerPic: kate,
-    ownerName: "Kate Paul",
-    bid: "1.5 ETH",
-  },
-
-  {
-    artImg: honey,
-    name: "Perfecto beam",
-    no: "#09",
-    ownerPic: joan,
-    ownerName: "Joan kid",
-    bid: "5 ETH",
-  },
-  {
-    artImg: newKid,
-    name: "New orleans kid",
-    no: "#700",
-    ownerPic: karl,
-    ownerName: "Karl max",
-    bid: "5 ETH",
-  },
-  {
-    artImg: homicide,
-    name: "Homicide pig",
-    no: "#59",
-    ownerPic: ella,
-    ownerName: "Ella sun",
-    bid: "2 ETH",
-  },
-
-  {
-    artImg: everton,
-    name: "Everton fox",
-    no: "#800",
-    ownerPic: kole,
-    ownerName: "kole paul",
-    bid: "1 ETH",
-  },
-  {
-    artImg: honey,
-    name: "Perfecto beam",
-    no: "#09",
-    ownerPic: joan,
-    ownerName: "Joan kid",
-    bid: "5 ETH",
-  },
-  {
-    artImg: newKid,
-    name: "New orleans kid",
-    no: "#700",
-    ownerPic: karl,
-    ownerName: "Karl max",
-    bid: "5 ETH",
-  }
-];
 
 export const EditorsCard = ({
   artImg,
@@ -103,21 +17,33 @@ export const EditorsCard = ({
   ownerName,
   bid,
   style,
+  id
 }) => {
   const setModal = useSetRecoilState(modalState)
+  const setArtId = useSetRecoilState(artIdState)
 
-  // const [openModal, setOpenModal] = useState(false)
+  const clickHandler = (e) => {
+    let id =  +e.target.parentElement.children[1].textContent
+    if(id ===0 || isNaN(id)) return
+
+    console.log(id)
+    setArtId(id)
+    setModal(true)
+  }
+
   return (
-    <Wrapper className="mt-5" style={style} onClick={() => setModal(true)}>
+    <Wrapper className="mt-5" style={style} onClick={clickHandler}>
+      <p style={{ display: 'none' }}>{id}</p>
       <div style={{ padding: "1em" }}>
         <img src={artImg} alt="" />
-
+        <p style={{ display: 'none' }}>{id}</p>
         <div className="name-no my-2">
           <h4>{name}</h4>
           <h4 style={{ color: "#f91a9f" }}>{no}</h4>
         </div>
 
         <div className="bidder my-2" style={{ fontSize: "15px" }}>
+          <p style={{ display: 'none' }}>{id}</p>
           <img src={ownerPic} alt={ownerName} />
           <p style={{ color: "rgba(252, 247, 253, 0.5)" }}>
             Owned by <br /> <span>{ownerName}</span>
@@ -145,13 +71,16 @@ export const EditorsCard = ({
 };
 
 const EditorsCardContainer = () => {
+  const arts = useRecoilValue(artState)
+
   return (
     <WrapperContainer>
       {arts.map((art, index) => {
-        const { artImg, name, no, ownerPic, ownerName, bid } = art;
+        const { artImg, name, no, ownerPic, ownerName, bid, id } = art;
 
         return (
           <EditorsCard
+            id={id}
             artImg={artImg}
             name={name}
             no={no}

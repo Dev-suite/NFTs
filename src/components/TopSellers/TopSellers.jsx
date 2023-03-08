@@ -41,6 +41,16 @@ const data = [
     name: "Jo brown",
     sold: "20.5",
   },
+  {
+    img: pau,
+    name: "Pau kie",
+    sold: "20.0",
+  },
+  {
+    img: andy,
+    name: "Andy june",
+    sold: "10.5",
+  }
 ];
 
 const TopSellers = () => {

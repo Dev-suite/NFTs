@@ -1,36 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { artIdState, artState } from '../atoms/artsAtom';
 import { modalState } from '../atoms/modaAtom';
-// import Button from 'react-bootstrap/Button';
-// import Modal from 'react-bootstrap/Modal';
 
 export default function Example() {
     const [modalStateValue, setModalStateValue] = useRecoilState(modalState)
+    const artIdValue = useRecoilValue(artIdState)
+    const arts = useRecoilValue(artState)
 
-    // const handleClose = () => setShow(false);
-    // const handleShow = () => setShow(true);
+    const foundArt = arts.find(art => art.id === String(artIdValue))
+
+    console.log(foundArt)
 
     return (
         <>
-
-            {/* <button type="button" class="btn btn-primary" onClick={()=>setShow(true)}>
-                Launch demo modal
-            </button> */}
-
-
-            {modalStateValue && <div class="modal" style={{ display: 'block' }}>
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                            <button type="button" class="btn-close" onClick={() => setModalStateValue(false)}></button>
+            {modalStateValue && <div className="modal" style={{ display: 'block' }}>
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <p >{foundArt.no}</p>
+                            <button type="button" className="btn-close" onClick={() => setModalStateValue(false)}></button>
                         </div>
-                        <div class="modal-body">
-                            ...
+                        <div className="modal-body">
+                            <div className="img">
+                                <img src={foundArt.artImg} alt={foundArt.ownerName} />
+                            </div>
+                            <div className="name">
+                                <h4>{foundArt.name}</h4>
+                                <p>
+                                    Owned by: <span>{foundArt.ownerName}</span>
+                                </p>
+                                <p>
+                                    Current bid: <span>{foundArt.bid}</span>
+                                </p>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick={() => setModalStateValue(false)}>Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                        <div className="modal-footer">
+                            <a target="_blank"
+                                href="https://opensea.io/"
+                                rel="noreferrer">
+                                <button className='btn bid-btn'>Bid now</button>
+                            </a>
                         </div>
                     </div>
                 </div>

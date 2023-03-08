@@ -90,7 +90,7 @@ const Footer = () => {
             @Devsuite
           </a>{" "}
         </span>
-        2022
+        2023
       </p>
     </Wrapper>
   );
